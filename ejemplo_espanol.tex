@@ -1,0 +1,485 @@
+% This is samplepaper.tex, a sample chapter demonstrating the
+% LLNCS macro package for Springer Computer Science proceedings;
+% Version 2.20 of 2017/10/04
+%
+%\documentclass{llncs}
+\documentclass[a4paper]{llncs}
+
+%\usepackage[english]{babel}
+\usepackage[english]{babel}
+
+\usepackage[]{inputenc}
+
+\voffset=10mm
+\hoffset=-3.5mm
+
+\widowpenalty=9999
+\clubpenalty=9999
+\hyphenpenalty=500
+\exhyphenpenalty=500
+\pagestyle{empty}
+
+%
+\usepackage{graphicx}
+% Used for displaying a sample figure. If possible, figure files should
+% be included in EPS format.
+%
+% If you use the hyperref package, please uncomment the following line
+% to display URLs in blue roman font according to Springer's eBook style:
+% \renewcommand\UrlFont{\color{blue}\rmfamily}
+
+\begin{document}
+%
+\title{Molecular Marker for Protein Electrophoresis \\ by Wavelet Transform}% \thanks{Supported by organization x.}}
+%
+\titlerunning{Molecular Marker for Protein}
+% If the paper title is too long for the running head, you can set
+% an abbreviated paper title here
+%
+
+
+%DESCOMENTAR PARA AUTORES
+\author{Diana Jimenez,
+Marco A. Cardoso-Moreno,
+Leticia Flores-Pulido, \\
+Lidia Patricia Jaramillo-Quintero}
+%
+\authorrunning{Flores-L\'opez et al.}
+%% First names are abbreviated in the running head.
+%% If there are more than two authors, 'et al.' is used.
+%%
+\institute{Universidad Aut\'onoma de Tlaxcala, \\ Facultad de Ciencias B\'asicas, Ingenier\'ia y Tecnolog\'ia, Sistemas Inteligentes, \\ Apizaco, Tlaxcala, Mexico 
+\\
+%\url{http://www.uatx.mx}
+\email{arturh11flolo@gmail.com, \{leticia.flores.p,lidiapatricia.jaramillo\}@uatx.mx}}
+%%
+
+
+
+
+\maketitle              
+% typeset the header of the contribution
+%
+\begin{abstract}
+%El procesamiento de im\'agenes es un \'area con la cual se ayuda a la m\'aquina a generar y obtener informaci\'on para as\'i poder clasificar y trabajar dicha informaci\'on. En esta investigaci\'on se save que los an\'alisis de electroforesis captan perfiles prote\'inicos, en los cuales se separan las prote\'inas para conocer su peso molecular, realizando un procesamiento a estas im\'agenes e implementando la transformada de wavelet, se puede fraccionar la muestra para enfatizar las prote\'inas con menor presencia al ojo humano, por lo tanto con la t\'ecnica de transformada wavelet es posible medir dichos perfiles y su peso correspondiente. En la actualidad la electroforesis es una t\'ecnica anal\'itica que se realiza en diversos perfiles, principalmente de ADN,medicina, medio ambiente y alimentos, yodos estos tienen diferentes pesos moleculares, los cuales, son conocidos mediante un marcador con un costo mayor a los \$5,000.00 m/n, el cual es colocado en un carril del an\'alisis. Con la transformada wavelet se logra crear la se\~nal de la imagen de electroforesis que nos da detalles de aproximaci\'on horizontales, verticales y diagonales, esto se logra debido a que se fragmenta en $n$ niveles, en esta investigaci\'on se llego hasta el nivel 3 de daubachies; la electroforesis permite la migraci\'on de las prote\'inas mediante un campo el\'ectrico con el que logra que bajen para su separaci\'on.
+Visual Information retrieval is an area where the analysis and recognition is helpful to generate and obtain data from image samples. In this research the image samples are obtained from analysis of electrophoresis that captures protein profiles in tissues. The electrophoresis provides a sample where the proteins are computed to know their molecular weight. The image digital processing takes electrophoresis images and a wavelet transform is applied to the sample that can be fractioned to emphasize the molecular weights that at first sight are not identified. Therefore, with the wavelet transform, it is possible to compute molecular weights of proteins and know their corresponding weight. Electrophoresis is a technique that is used in various analysis such as DNA, medicine, environment and food. All these profiles have different molecular weights, which are known by a marker that is placed in a lane. In this proposal, the wavelet transform is applied to the images of electrophoresis samples, creating the signal of the protein with the approximation coefficients, that achieves to measure a molecular weight. The approximation coefficients are computed at 3 levels of decomposition with the wavelet transform Daubechies. It is then possible to detect a molecular weight of nearly 300 samples of electrophoresis with an accuracy of 97 \% in terms of numerical and visual similarity by means of visual information retrieval evaluated with recall and precision metrics.
+
+\keywords{wavelet transform, electrophoresis, protein, molecular marker, visual information retrieval.}
+\end{abstract}
+%
+%
+%
+
+\section{Introduction}
+
+Electrophoresis is the analytical technique used by the professionals of chemistry to achieve the separation of proteins through an electric field. It can be made in silver or coomassi blue substances, this last generates the sodium dodecyl sulfate polyacrylamide gel electrophoresis (SDS-PAGE). In this gel, several samples are placed, and once an electric field is induced, the proteins found in the samples placed in each lane, will go down depending on their molecular weight, as light as they are, they will lower in the gel, when the run in the electric field is finished, the gel is placed in a relativising substance, which after a time allows to visualize the stains of proteins in the gel for molecular measurement. To the above, it is known as the electrophoresis process \cite{Horton}. It is proposed, then, that the images of electrophoresis are analyzed so that the molecular weight is measured in an automated way.
+
+In the area of ​​digital image processing, the main objective is to emulate the capabilities of human vision, the images are defined as a two-dimensional function
+ $f(x, y)$, where $x$ and $y$ are the intensity coordinates or gray levels. Because the images contain diverse characteristics that affect the optimal 
+functioning of a system that works with them, it is necessary to perform a preprocessing that results in filtering or improvement of contrasts. 
+Once this preprocessing is done, you can classify, segment, recognize objects, or even label them \cite{Gonzalez}.
+
+We have not found so far, research papers that measure the molecular weight of electrophoresis samples by means of wavelet transform in recent publications. However, the state of the art has been divided into three parts: In the first part, we will expose only a couple of works that talk about the recovery of images. In the second part we will talk about those articles that expose various methods for the improvement of electrophoresis images. It should be noted that some research focuses on 2D electrophoresis analysis, but even so, they do not perform molecular weight measurements, which is the main focus of this article. The third part of the state of the art will exhibit two works in which wavelet transform is used for electrophoresis images, however, a measurement of molecular weights is not performed either.
+
+
+% articulo 2
+ 
+In this work \cite{Zhan} applies two-dimensional gel electrophoresis together with mass spectrography to
+Identify proteoforms. It is found that about 1000 protein spots are detected in each 2D gel. Because mass spectography does not identify complete protein sequences, when applying a separation in electrophoresis, mass spectography
+It can be more effective in identification.
+
+% article 1
+The first article is that of \cite{Kalenberg} where it is mentioned that there are various types of software in which electrophoresis images can be analyzed. In this work it is mentioned that between different software, different images and data contained in them can emerge. In this study it was concluded that the electrophoresis data vary depending on the software, the software considered were TotalLab 120 and LabImage 1D.
+
+
+% article 3
+
+In \cite{Reza-Sohrabi}, wavelet transform and zero crossing point technique were used in various studies to obtain its signals. With this, they obtained 95 \% confidence since. There were no significant differences between the wavelet and other applications. It was tested with daubachies level 8 with decomposition 15 (DB8-15), biorthogonal level 4.4 with decomposition 7 (BIOR4.4-7) and biorthogonal 3.3 with decomposition 4 (BIOR3.3-4) and good calibration results were obtained. Electrophoresis samples are used for protein detection in patients with fibromyalgia. The analysis shows the ability to accept a medication for treatment.
+
+
+Another way to obtain similarity in the images is that applied in \cite{Liu} where the proposed algorithm improves distinctive characters of the image using spatial distribution, which is calculated by means of the location histogram. On space, scales and orientations of the local characteristics, in order to achieve a good~recovery.
+
+% agregar parrafo de zhou ref 
+In the work of \cite{Zhou} molecular mass spectrometry is analyzed. Capillary electrophoresis is analyzed by means of a method that combines mass spectrometry with high resolution and rapid separation of the samples. This research offers selective detection with small volumes of examples. The above is done by cell~analysis.
+
+
+% agregar parrafo de salazar y centeno debo traducir
+
+There are works with electrophoresis images in which they only focus on the detection or processing of protein stains, primarily, they perform a preprocessing and manage to restore the contrast to more easily dentify the electrophoresis spots \cite{Salazar-Centeno}. This work focuses on obtaining those spots that do not stand out with the naked eye, followed by that process, use a maximum and minimum algorithm to be able to locate them all.
+
+
+
+\section{Molecular Marker for Protein Electrophoresis by Wavelet Transform System}
+
+The research proposal described in this article (see Figure \ref{propuesta}) contains the following stages: initially, the compilation of images of protein electrophoresis in vegetables for human consumption is made. Electrophoresis samples are generated by means of an electrophoresis chamber, which are commonly used in the laboratories of industrial chemical engineers. The samples are adjusted in size to be processed independently by transform wavelet Daubechies Type 1, with decomposition at level 3 (DB1-3). This level is chosen due to the fact that greater relevant characteristics are obtained within the histogram of wavelet coefficients, as well as the possible noise generation of the signal is reduced at minimum. Subsequently, from the wavelet transform Daubechies and the approximation coefficients, an extraction of main characteristics is performed, that is, statistics of the maximum, the minimum, standard deviation, average and median. Each one of these features are obtained to allow the protein computation. 
+
+
+\begin{figure}[h!]
+\centering{
+%\includegraphics[width=12cm, height=8cm]{Diagrama_Electroforesis.jpg}
+}
+\caption{Visual description of the proposal of molecular markers for protein electrophoresis by wavelet transform.} \label{propuesta}
+\end{figure}
+
+Thus, the analogy between wavelet approximation coefficients and a commercial marker scale of molecular weights is made. The process is the following: (a) the corpus of images are classified in 4 groups (see Figure \ref{pantalla1}). This profiles are based in molecular weight ranges. Every electrophoresis sample are images with a size of 400 X 700 pixels. Then, the wavelet transform is computed at decomposition 3. The matrix of approximation coefficients is taken for a parametric computation. The main features of parametric computation are: maximum, minimum, standard deviation, mean and median. This process can be observed in Figure \ref{pantalla2}.
+
+
+Every feature of the previously mentioned parametric computation is analysed. the values and the ranges. Then, the analysis provides that the $minimum$ feature, are the only parameter that discriminate between the 4 groups of molecular weights. So, the values of minimum for each group are:
+
+\begin{itemize}
+\item First group of molecular weights: this group throws minimum values between 500 and 712. The molecular weight of this group of samples, can be of 10 kD to 15 kD.
+\item Second group of molecular weights: this group throws minimum values between 713 to 750. The molecular weight of this group of samples, can be of 15 kD to 20 kD.
+\item Third group of molecular weights: this group throws minimum values between 751 and 1700. The molecular weight of this group of samples, can be of 20 kD to 25 kD.
+\item Fourth group of molecular weights: this group throws minimum values between 1700 and 2000. The molecular weight of this group of samples, can be of 25 kD to 37 kD.
+\end{itemize}
+
+The molecular weight measurement correspondence and the detail range of values achieved by the minimum are shown in Table \ref{equivalencias}.
+
+Below is a Equivalences Measurement for Molecular Weight in Table \ref{equivalencias}, which indicates the analogy on which scales are based for measurements of molecular weights. To create those ranges of measurements, we took into account the molecular weight endorsed by experts, the parametric characteristics indicated, mainly the minimum thrown by the matrix of approximation coefficients of protein profile samples. It should be noted, that this scale can be even more accurate, and throw more measurements. This process will achieve more future~work.
+
+\begin{table}
+\centering
+\caption{Minimum equivalence for the molecular weight - scale.}
+\begin{tabular}{p{3cm} p{3cm}}
+\hline
+\centering
+Minimum  & Molecular Weight \\ \hline
+\hline \centering
+500 -712  &  10 kD - 15 kD\\
+\hline \centering
+713-750  &   15 kD - 20 kD\\
+\hline \centering
+751-1700 &  20 kD - 25 kD\\
+\hline \centering
+1700-2000 & 25 kD - 37 kD\\
+\hline \centering
+\end{tabular}
+\label{equivalencias}
+\end{table}
+
+
+Finally, a comparison is made between the elements of the imaging collection that provide molecular weights of proteins already endorsed by experts in the area of molecular metrics and by commercial molecular markers.
+
+
+The novelty of the proposal is that currently there are not many works that apply wavelet transform to measure or detect the molecular weight of electrophoresis samples. On the other hand, the state of the art regarding the samples for improvement of the resolution of images obtained from samples of electrophoresis protein profiles if it exists, but its reading or detection by automatic means, is still an area of opportunity for the approaches that involve transformed.
+
+
+
+\section{Methods and Materials}
+In this section it is explained the foundations on which this research is constituted. The first basic concept is electrophoresis, since it is from this process of industrial chemistry that the samples arise and are created and that was also the source of inspiration for the measurement of molecular weights of proteins. The second basic concept is the wavelet transform. The wavelet transform is widely used in the area of visual information retrieval, since it is an effective method to extract characteristics of a two-dimensional signal. The characteristics in time and frequency are detectable from this type of transformation.
+
+\subsection{Electrophoresis}
+Electrophoresis is an analytical technique used by professionals in the area of ​​industrial chemistry to obtain protein profiles and the analysis of proteins. Its objective is to separate the proteins by means of an electric field. This technique is carried out in polyacrylamide gel, in which the protein samples are placed and then the electric field is applied. Sodium dodecylsufate (SDS) is also used and the natural charge of the proteins can be calculated and separated based on their mass, therefore SDS-PAGE electrophoresis evaluates the purity and estimates the atomic weight of the proteins \cite{Horton}.
+The electrophoresis process begins with the placement of the samples in each lane of the gel, then the gel is poured into the electrophoresis chamber which allows the migration of the proteins. The speed of migration of the proteins is proportional to the percentage of the pore of the material and its mass, those that are of greater weight, show resistance and migrate slowly, those with less weight are those that end up until the end of the, meaning that they will migrate faster.
+The analysis of electrophoresis uses a standard of measurement of molecular weights, called a marker, its value is around \$ 300 US, and its function is precisely to measure the molecular weight of the proteins in question, or the sample in turn. The weight is measured in kiloDaltons (kD); There are different types of markers, the standard is two colors, there is also the five colors that belong to the standards of the brand \textit{kaleidoscope} where the ranges of the markers vary between 10-250 kD. In commercial markers, the colors indicate the range and type of protein contained in the electrophoresis analysis.
+
+\subsection{Wavelet Transform}
+The wavelet transform works with audio signals and images, that is, with one-dimensional or two-dimensional signals. Its function is to decompose the signal into various components, with this it is possible to locate the approximation coefficients and the detail coefficients of the image. The process starts with the original image and then decomposes the image into sub-images until it reaches a low-resolution image. The wavelet transform has several variants, the family of wavelet transform used in this work is the Daubechies transform that was proposed by Ingrid Daubechies as defined in \cite{Walker}. This type of wavelet was chosen, due to its effectiveness to highlight the coefficients of detail of the type of electrophoresis samples.
+
+Then, a Daubechies transform Type 1 at decomposition level 3 is mapped as $f \mapsto (a^{3} \mid d^{3}) $ where $a^3$ draws the approximation coefficients and $d_{3} $ extracts the detail coefficients. Each value of the signals composed by the coefficients, is formed by a scalar product, being for the approximation matrix $ a_m = f \cdot V_{m}^3$, and for the detail matrix $ d_{m} = f \cdot W_ {m}^{3} $. Where $V_{m}^{3} $ is the scaled entry signal at level 3 and $ W_{m}^{3} $ is the wavelet transform at  level 3. The input signal is taken as indicates in the Equation (\ref{senal}):
+
+\begin{equation}
+f=(f_1,f_2,...,f_N).
+\label{senal}
+\end{equation}
+
+\noindent If $f_i$ is the input image, then, Equation (\ref{am1}) represents the calculation of the approximation coefficients:
+
+\begin{equation}
+a_m = f_1 \cdot \alpha_1,  f_2 \cdot \alpha_2,  f_3 \cdot \alpha_3,  f_n \cdot \alpha_n,
+\label{am1}
+\end{equation}
+
+\noindent where, $a_m$ is redefined with the substitution of $\alpha_i$ as:
+
+\begin{equation}
+a_{m} =  f_{1} \frac{1+\sqrt{3}}{4 \sqrt{2}}, f_{2} \frac{3-\sqrt{3}}{4 \sqrt{2}}, 
+f_{3} \frac{3+\sqrt{3}}{4 \sqrt{2}}, f_{4} \frac{1-\sqrt{3}}{4 \sqrt{2}}.
+\label{am2}
+\end{equation}
+
+\noindent For the decomposition matrix computation, the Equation (\ref{dm1}) represents the computation of detail coefficients:
+
+\begin{equation}
+d_m=  f_1 \cdot \beta_1,  f_2 \cdot \beta_2, f_3 \cdot \beta_3, f_n \cdot \beta_n,
+\label{dm1}
+\end{equation}
+
+\noindent where $\beta_i$ values, can be defined likewise $\alpha_i$, and Equation \ref{dm1} can be redefined as:
+
+\begin{equation}
+d_{m} =  f_{1} \frac{1+\sqrt{3}}{4 \sqrt{2}}, f_{2} \frac{3-\sqrt{3}}{4 \sqrt{2}}, 
+f_{3} \frac{3+\sqrt{3}}{4 \sqrt{2}}, f_{4} \frac{1-\sqrt{3}}{4 \sqrt{2}}. 
+\label{dm2}
+\end{equation}
+
+
+\noindent The wavelet transforms, in any of its variants, can generate several levels of sub-signals, once the first level is obtained, the same calculations are made, sub signal by sub signal. More information regarding this type of transform can be found in \cite{Walker}.
+
+It is important to mention that the use of Wavelet Daubechies Transformed Type 1 to Decomposition 1 (DB1-L1) was selected since it is known to be one of the simplest wavelet transforms. However, tests were carried out with the Haar Type 1 wavelet transfer to Decomposition 1 (HAAR1-L1) and the Biorthogonal Type 1 wavelet transform to Decomposition 1 (BIOR1-L1). These initial tests are not shown here for reasons of space, however, results almost identical to those obtained by Daubechies in terms of parametric values ​​were obtained. Tests were also performed with other levels of decomposition, that is, apart from testing Daubechies to decomposition 1, it was also tested with Daubechies Type 1 to Decomposition 4 (DB1-L4), obtaining very large parametric variations, which no longer corresponded to the equivalences , nor to the molecular weights of the samples. On the other hand, by testing with Daubechies Level 4 to Decomposition 4 (DB4-L4), the difference between minimum values ​​and molecular weights, was getting bigger and bigger. That is, the lower the decomposition level, the higher the accuracy of the molecular weight calculation.
+
+\section{Daubechies Wavelet Transform Implementation}
+
+The Toolbox of Matlab R2014a was used to choose the best wavelet transform. The computer equipment was a PC with Windows 10 based on x
+X64 with intel processor core i7 with 2.60 GHz, NVIDIA GeForce GTX 960M. The selection criterion was based on the clearer visualization of the wavelet coefficients of the electrophoresis samples. The visual selection of the Daubechies transform was visually determining, which is indicated in Figure \ref{tool} where the decomposition approximation coefficients level 3 are observed. The collection of electrophoresis images is composed by 64 samples of low molecular weight, 6 samples of the first group, 1 sample of the second group, 22 samples of the third group and 1 sample of the third group.
+
+\begin{figure}[h!]
+\centering{
+%\includegraphics[width=12cm, height=8cm]{tool.jpg}
+}
+\caption{Daubechies Wavelet Transform in tree structure for level 3 of decomposition for electrophoressi samples (\cite{Misti}).} \label{tool}
+\end{figure}
+
+
+Tests were performed with the protein samples in Matlab's Toolbox 2-D Wavelet and the representative details of the images were observed. The wavelet transform provides a minimum values that matches with the molecular weights of a commercial marker, visually and numerically speaking. Daubechies Wvelet Transform at 3 decomposition level is chosen to do the work. Also, Haar, or Biorthogonal can be used to do the molecular weight detection as similar results than Daubechies. The approximation and detail matrix of each of the available samples was then carried out. It should be noted that the acquisition of each sample takes approximately 4 working days, so it is not easy or quick to obtain each of the samples of protein profiles. Once computed approximation and detail matrices, is possible to make statistics of each one for each sample. The parametric statistics used are the minimum, the maximum, the average and the standard deviation. The behaviour of the system and its operation can be seen in Figure \ref{pantalla1}.
+
+\begin{figure}[h!]
+\centering{
+%\includegraphics[width=12cm, height=10cm]{pantalla1.jpg}
+}
+\caption{Example of performance of the molecular weight detection system based on wavelet transform.} \label{pantalla1}
+\end{figure}
+
+
+The performance of the system begins with the loading of a sample of electrophoresis, after which the image synthesized with the approximation coefficients of Daubechies at level 3 is displayed. Each sample is calculated using the parametric statistics already mentioned in the previous section of this article. On the right side of the interface, the obtained wavelet coefficients, both approximation and detail, are displayed. Finally, in the lower graph, the histogram of the most outstanding coefficients of the protein profiles is shown.
+
+The second part of the system, obtains the 5 samples that presented greater similarity with the sample of molecular weights that they want to be within the collection. Similarity was obtained by creating a difference matrix by means of a Euclidean metric \cite{Baeza}. The Euclidean metric is meaningful to establish the differences between sample desired and similar samples and is defined in Expression (\ref{euclidiana}): 
+
+\begin{equation}
+de_i= \sqrt{(min_{a}-min_{b})^{2}},
+\label{euclidiana}
+\end{equation}
+
+\noindent where $de_i$ is the difference between the electrophoresis sample desired and the electrophoresis similar samples, $min_{a}$ is the sample desired and $min_{b}$ is other sample inside the corpus. The objective of euclidean metric is to compute a correlation matrix. 
+
+Within the proposed interface, not only the images of greater similarity are displayed, but also the characteristics thrown by the wavelet transform Daubechies. The characteristics are the parametric statistics obtained from the matrix of approximation coefficients, that is, average, median, minimum, maximum and standard deviation. Finally, the difference between the image of the desired molecular weight and the images most similar to that weight within the collection is calculated, in addition to the measurement of the molecular weight of the samples. An example of the performance of the system is shown in Figure~\ref{pantalla2}.
+
+
+\begin{figure}[h!]
+\centering{
+%\includegraphics[width=12cm, height=7cm]{Prue_baja.jpg}
+}
+\caption{Example of information retrieval for molecular weight measurement.} \label{pantalla2}
+\end{figure}
+
+\section{Results}
+
+
+On the other hand, in Table \ref{pruebas}, 30 random experiments of a corpus of 64 samples of protein profiles are shown, which indicate the desired molecular weight in the sample to be recovered, the minimum value of difference that coincides with the equivalent molecular weight, the number of similar samples recovered by the system, the number of non-similar samples returned by the system, the system relevance values (recall) and the values of precise samples recovered by the system (precision). 
+
+
+
+\begin{table}[h!]
+\centering
+\caption{Recall and precision statistics.}
+
+\begin{tabular}{p{1.5cm}p{1.5cm}p{1.5cm}p{1.5cm}p{1.5cm}p{1.5cm}p{1.5cm}}
+\hline
+
+Sample  & Molecular Weight & Minimum & Similar Samples & No Similar & Recall & Precision\\
+\hline
+\hline
+1 & 10-15 & 666.13 & 3 & 2 & 0.50 & 0.60\\
+\hline
+2 & 20-25 & 863.50 & 1 & 4 & 0.17 & 0.20\\
+\hline
+3 & 20-25 & 967.50 & 1 & 4 & 0.17 & 0.20\\
+\hline
+4 & 10-15 & 694.50 & 3 & 2 & 0.50 & 0.60\\
+\hline
+5 & 10-15 & 501.25 & 4 & 1 & 0.67 & 0.80\\
+\hline
+6 & 10-15 & 571.00 & 4 & 1 & 0.67 & 0.80 \\
+\hline
+7 & 20-25 & 1481.25 & 4 & 1 & 0.18 & 0.80\\
+\hline
+8 & 25-37 & 1796.00 & 5 & 0 & 0.23 & 1.00\\
+\hline
+9 & 20-25 & 1284.00 & 5 & 0 & 0.23 & 1.00\\
+\hline
+10 & 15-20 & 723.75 & 0 & 5 & 0.00 & 0.00\\
+\hline
+11 & 20-25 & 1244.00 & 4 & 1 & 0.18 & 0.80\\
+\hline
+12 & 20-25 & 1213.75 & 1 & 4 & 0.05 & 0.20\\
+\hline
+13 & 20-25 & 944.00 & 3 & 2 & 0.14 & 0.60\\
+\hline
+14 & 15-20 & 743.88 & 2 & 3 & 0.09 & 0.40\\
+\hline
+15 & 20-25 & 1164.00 & 5 & 0 & 0.23 & 1.00\\
+\hline
+16 & 20-25 & 913.50 & 3 & 2 & 0.14 & 0.60\\
+\hline
+17 & 20-25 & 774.13 & 2 & 3 & 0.09 & 0.40\\
+\hline
+18 & 20-25 & 1669.00 & 5 & 0 & 0.23 & 1.00\\
+\hline
+19 & 25-37 & 1713.88 & 5 & 0 & 0.23 & 1.00\\
+\hline
+20 & 25-37 & 1704.00 & 5 & 0 & 0.23 & 1.00\\
+\hline
+21 & 25-37 & 1714.00 & 0 & 5 & 0.00 & 0.00\\
+\hline
+22 & 20-25 & 1094.00 & 5 & 0 & 0.23 & 1.00\\
+\hline
+23 & 20-25 & 1164.13 & 5 & 0 & 0.23 & 1.00\\
+\hline
+24 & 20-25 & 1354.13 & 4 & 1 & 0.18 & 0.80\\
+\hline
+25 & 20-25 & 1051.63 & 4 & 1 & 0.18 & 0.80\\
+\hline
+26 & 20-25 & 1037.13 & 4 & 1 & 0.18 & 0.80\\
+\hline
+27 & 20-25 & 1279.25 & 4 & 1 & 0.18 & 0.80\\
+\hline
+28 & 20-25 & 1300.00 & 4 & 1 & 0.18 & 0.80\\
+\hline
+29 & 20-25 & 854.00 & 4 & 1 & 0.18 & 0.80\\
+\hline 
+30 & 20-25 & 1165.13 & 5 & 0 & 0.23 & 1.00\\
+\hline
+ & & & & & \textbf{0.22} & \textbf{0.70} \\
+ \hline
+\end{tabular}
+
+\label{pruebas}
+\end{table}
+
+
+
+The recall and precision metrics aim to evaluate the performance of the visual retrieval system \cite{Chen}. The recall average of 30 random samples is of 0.22 and precision average is of 0.70. As well as recall achieves 0.5 in each retrieval, the system can be considered as efficient. As well as precision achieves 1.0 in each retrieval, the system can be considered as efficient. The Figure \ref{evaluacion} shows the behavior of recall and precision metrics for this visual retrieval system. Details of recall and precision metrics can be consulted in \cite{Chen} and \cite{Baeza}. Recall is defined in expression (\ref{rec}) and precision is expressed in (\ref{pres}): 
+
+\begin{equation}
+Recall= \frac{Number \quad of \quad Retrieved \quad Images}{Number \quad of \quad Images \quad in \quad Set},
+\label{rec}
+\end{equation}
+
+\begin{equation}
+Precision= \frac{Number \quad of \quad Retrieved \quad Images}{Answer \quad Set},
+\label{pres}
+\end{equation}
+
+
+\noindent where the \textit{Number of Retrieved Images} imply the similar electrophoresis images that matches with query images, visually spoken and in molecular weight. The value of \textit{Number of Images in Set}, provides the number of images depending on set of query image. Thus, in query image belongs to: 
+\begin{itemize}
+\item 1st group: the number of samples availables are 6.
+\item 2nd group: the number of samples availables are 1.
+\item 3rd group: the number of samples availables are 22.
+\item 4th group: the number of samples availables are 1.
+\end{itemize}
+
+The value of \textit{Answer Set} always will be of 5, because the system and the interface was programmed for to browse 5 retrieved images.
+
+\begin{figure}[h!]
+\centering{
+%\includegraphics[width=12cm, height=9cm]{rec_pres_3.png}
+}
+\caption{Evaluation of recall and precision metrics for the weight molecular visual detection.} \label{evaluacion}
+\end{figure}
+
+
+From the technical point of view, it is possible to reproduce the previously detailed experiments. This is possible, through any other collection of scanned electrophoresis images. The images can be produced in an industrial chemistry laboratory. Protein samples can be extracted from food, plants, or tissue samples from various sources. Once obtained, they can be converted to gray levels and subsequently analysed by a transformed wavelet Daubechies. The molecular weight can be calculated using the equivalence values shown in the Table \ref{equivalencias} proposed in this article. These equivalences cover the molecular weight readings or ranges comparable to the most commonly used commercial markers.
+
+
+\section{Conclusions}
+
+To obtain the electrophoresis samples, a long process is required, because this involves several steps for its realization, the process that requires more time is when the sample is placed in the solution. developer, which helps clean up the analysis and only leaves the areas that contain information on the proteins. This process involves about 96 hours (approximately 4 days), so the obtaining of each one of the 30 samples for the experiments in Table \ref{pruebas}, is not a trivial task.
+
+The experimentation stage faced a challenge at the moment of producing the samples, which consisted in that the electric field supply, in many occasions, caused the loss of the same due to the excess voltage. Because of this, the samples must be discarded. Subsequently, the processing part involved the cutting of each of the samples, and standardized each image for analysis, that is, each image had to be cut with a measurement in pixels of 100 pixels wide by 700 pixels long approximately.
+ 
+To perform the calculation of the wavelet transform, we tried the Haar, the Biorthogonal and the Daubachies variant, achieving similar results, however, only Daubechies results are showed. Visual coefficients of greater importance in the protein signal content highlight the molecular weight score. Then the decomposition levels are analysed, where the wavelet transform Daubechies showed with higher illumination, said protein score. On the other hand, the parametric statistics and the histograms obtained from arrays of approximation coefficients, established an almost direct analogy between the detection of the desired molecular weights and the electrophoresis samples.
+
+By applying the wavelet transform, in the variant Daubechies to a level of decomposition 3, the approximation coefficients of each sample were obtained, from which parametric statistics were obtained such as the mean, the median, the minimum value, maximum and standard deviation. Of these 5 statistics, which are considered as characteristics of the image, only in the case of the minimum value could a correspondence be established between the minimum ranges and the molecular weight marks. The other characteristics did not show much correspondence for the correct detection of molecular weights, because there were no predefined ranges, the readings were spliced or there was definitely no adequate correspondence.
+
+Within the 30 experiments that are observed in the Table \ref{pruebas}, it has that in 93 \% of the cases, at least one image corresponds effectively to the molecular weight that you want to find, that is, the system recovers statistics and visually at least one molecular weight similar to the one to be found, and the recovery error is 0.06 \% Recall and precision statistics can be viewed in Figure \ref{evaluacion}. 
+
+
+This indicates that it can also be observed that in each of the requests for molecular weights memory is measured (similar images), and precision (images that exactly correspond to the search). In each of the 30 cases taken at random, we can see that while the precision is closer to 1.0 indicates that the search was more accurate. If recall is closer to 0.5, implicates that the number of similar images was higher or more efficient visually and statistically talking. 
+
+
+ 
+
+
+%%
+%% ---- Bibliography ----
+%%
+%% BibTeX users should specify bibliography style 'splncs04'.
+%% References will then be sorted and formatted in the correct style.
+%%
+ %\bibliographystyle{splncs04}
+ %\bibliography{mybibliography}
+%%
+\begin{thebibliography}{88}
+%
+\bibitem{Horton}
+Horton, R.: Principios de bioqu\'imica. 4ta. edn. Prentice Hall Person, M\'exico (2008)
+%
+\bibitem{Gonzalez}
+Gonz\'alez, R.C., Woods, R.E.: Digital image processing, 4ta. edn. Person, M\'exico (2018)
+% 4
+
+
+\bibitem{Zhan}
+Zhan, X., Zhou, T.: Application of Two-dimensional Gel Electrophoresis in Combination with Mass Spectrometry in the Study of Hormone Proteoforms, Chapter Mass Spectrometry in Future Perceptions and Applications. IntechOpen, pp. 1--17 (2018)
+
+\bibitem{Kalenberg} Kahlenberg, F., Sack, U., Bolt, A.: Impact of Image Analysis Software on Quantitations of 1D Gel Electrophoresis. J. Lab. Med. 36(3), 153--157. Berlin (2012)
+
+\bibitem{Reza-Sohrabi}
+Reza-Sohrabi, M., Muzabeygi, V., Davallo, M.: Use of Continuous Wavelet Transform Approach for Simultaneous Quantitative Determination of Multicomponent Mixture by UV-Vis Spectrophotometry. Spectrochimica Acta Part A: Molecular and Biomolecular Spectroscopy Vol. 201, pp. 306--314,  Elsevier (2018)
+
+\bibitem{Liu} Liu, P., Miau, Z., Guo, H., Wang, Y., Ai, N.: Adding Spatial Distribution Clue to  Aggregated Vector in Image Retrieval. EURASIP Journal on Image and Video Processing, Springer Open, Vol. 9, pp. 1--14 (2018) 
+
+\bibitem{Zhou}
+Zhou, W., Zheng, B., Liu, Y., Wang, C., Sun, W., Li, W., Chen, S.: Advances in Capilarlly Electrophoresis Spectrmetry for Cell Analysis. Trends in Analytical Chemistry, pp. 1--15, Elsevier (2019) 
+
+%
+\bibitem{Salazar-Centeno}
+Salazar-Centeno, C.A., Niño-Niño, C.A. Diaz-Suarez, R.A.: Detecci\'on de bandas de color en una imagen de electroforesis en gel de una dimensi\'on usando un algoritmo de localizaci\'on basado en m\'aximos y m\'inimos. ITECKNE 14(2), 12--30 (2017)
+
+
+
+%
+%
+%agregar aqui los otros dos  de recupracion de  imagnes 
+%
+%\bibitem{uno}
+%\bibitem{dos}
+%
+%agregar aqui los articulos de  electroforesis e imagenes (son 4)
+%\bibitem{uno}
+%\bibitem{dos}
+%\bibitem{tres}
+%\bibitem{cuatro}
+
+\bibitem{Walker}
+Walker, J.S.: A primer on wavelet and their scientific applications. 2da. edn. Chapman and Hall/Crc, EUA (2008)
+
+\bibitem{Misti}
+Misti, M., Misti, Y., Oppenheim, G., Poggi, J.M.: Wavelet Toolbox for use with Matlab, 2nd edition, Ver. 2.0, Release 5.1, The Mathworks E.U.A. (2000)
+
+\bibitem{Chen}
+Chen, Y., Li, J., Wang, J.Z.: Machine Learning and Statistical Modeling Approaches to Image Retrieval. Kluwer Academic Publishers (2004)
+
+\bibitem{Baeza}
+Baeza-Yates, R., Ribeiro-Neto, B.: Modern Information Retrieval. ACM Press, Addison-Wesley, Edinburgh, England (1999)
+%
+%\bibitem{ref_article1}
+%Author, F.: Article title. Journal \textbf{2}(5), 99--110 (2016)
+%
+%\bibitem{ref_lncs1}
+%Author, F., Author, S.: Title of a proceedings paper. In: Editor,
+%F., Editor, S. (eds.) CONFERENCE 2016, LNCS, vol. 9999, pp. 1--13.
+%Springer, Heidelberg (2016). \doi{10.10007/1234567890}
+%
+
+%
+%\bibitem{ref_proc1}
+%Author, A.-B.: Contribution title. In: 9th International Proceedings
+%on Proceedings, pp. 1--2. Publisher, Location (2010)
+%
+%\bibitem{ref_url1}
+%LNCS Homepage, \url{http://www.springer.com/lncs}. Last accessed 4
+%Oct 2017
+\end{thebibliography}
+\end{document}

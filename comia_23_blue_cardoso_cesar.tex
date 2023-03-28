@@ -1,0 +1,152 @@
+% Created 2023-03-27 Mon 19:35
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper]{llncs}
+\usepackage[hidelinks]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{cleveref}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage[spanish, american]{babel}
+\usepackage[]{inputenc}
+\voffset=10mm
+\hoffset=-3.5mm
+\widowpenalty=9999
+\clubpenalty=9999
+\hyphenpenalty=500
+\exhyphenpenalty=500
+\pagestyle{empty}
+\date{\today}
+\title{Paper Comia 23}
+\begin{document}
+
+
+
+
+\title{Pseudoetiquetado para el análisis de polaridad en tuits: un primer
+    acercamiento}
+  % \author{}
+  % \institute{}
+  \author{Diana Jimenez, Marco A. Cardoso-Moreno, Cesar Macias}
+  \authorrunning{Jimenez et al.}
+
+
+  \institute{Instituto Politécnico Nacional, \\ Centro de Investigación en Computación, \\
+    Laboratorio de Ciencias Cognitivas Computacionales, Ciudad de México, México \\
+  \email{correo_blue@cic.ipn.mx, \{correo_blue,mcardosom2021,correo_cesar\}@cic.ipn.mx}}
+
+\maketitle
+
+
+\begin{abstract}
+
+
+
+\keywords{BCI \and EEG \and ERP \and P300}
+\end{abstract}
+
+\section{Introducción}
+\label{sec:orgb0ab483}
+Las redes sociales hoy en día forman una parte de la vida cotidiana para la
+población en general, ya sea para cuestiones de relaciones interpersonales,
+\emph{networking} e incluso, para la consulta y diseminación de información
+\cite{improving_sentiment_prediction,tesis_cesar,jtaer18020039}. A partir de
+este incremento en el uso de redes sociales, intensificado en años recientes
+gracias a la pandemia de COVID-19 \cite{greenhow2021inquiring}, es que estas
+plataformas se han vuelto parte del discurso público, ya que los algoritmos
+utilizados en las mismas permiten a sus usuarios interactuar con diversos grupos
+sociales, lo que los mantiene al tanto de los eventos y problemáticas actuales
+\cite{BASTICK2021would_you_notice}.
+
+En particular, Twitter no presenta muchas restricciones sobre el contenido de
+las  publicaciones que sus usuarios pueden efectuar por lo que, en general,
+suelen ser sobre cualquier tema, esta aparente libertad que la plataforma provee
+es la principal razón de que esta red social tiene preferencia entre los
+internautas para, en ella, mostrar sus opiniones \cite{tesis_cesar}.
+
+Dentro de las áreas de procesamiento de lenguaje natural (PLN) y lingüística
+computacional existe la tarea de análisis de opiniones, que consiste en,
+mediante el análisis del texto donde un comentario opinión fue expresado,
+determinar el la opinión que una persona sobre el tema en cuestión
+\cite{mejova2009sentiment}; el análisis de la polaridad en una opinión se
+considera, a su vez, una subtarea de este campo \cite{gambino-2019}. Determinar
+la polaridad de un texto se refiere, entonces, a clasificar, dado un texto, si
+la opinión que se ha vertido en este es positiva o negatica, es decir, qué tan
+polarizada es.
+
+\section{Revisión de la literatura}
+\label{sec:org158fde6}
+La clasificación de textos, por su parte, puede llevarse a cabo mediante
+estrategias de apredizaje automática, específicamente, aprendizaje supervisado.
+Estas técnicas han sido, y siguen siendo, ampliamente utilizadas en la
+clasificación de textos para diferentes tareas, siendo una de las más destacadas
+el análisis de sentimientos. Por ejemplo, en \cite{jaca2023sentiment} se hace uso
+de redes neuronales recurrentes (RNR), específicamente redes Bi-LSTM (del inglés
+\emph{Bi Long Short-Term Memory}) para esta tarea;  de manera similar,
+\cite{depression_detection} utilizan Twitter como un medio donde la gente puede
+expresar síntomas de depresión que requieren ser reportados por un individuo con
+esta afectación psicólogica para detectar dicho padecimiento de manera temprana,
+para lo cual utilizaron RNR tradicionales, así como redes LSTM; en
+\cite{roberta_gru} utilizan el modelo de transforme RoBERTa-GRU (del inglés
+\emph{Robustly Optimized BERT Pretraining Approach} y \emph{Gated Recurrent Units}) para
+la clasificación de sentimientos en diversos datasets considerados como
+\emph{baselines}; por su parte, \cite{sentiment_naive_bayes} utilizan el clasificador
+Naive-Bayes para la misma tarea, apoyandose del recurso léxico \emph{sentiwordnet}
+para agregar a cada palabra un puntaje de sentimiento positivo, negativo u
+objetivo.
+
+En cuanto a la tarea específica de análisis de polaridad en texto, uno de los
+primeros trabajos que se llevaron a cabo fue aquel de
+\cite{pang_sentiment_classification}, en el cual se utilizaron clasificadores
+tradicionales, tales como: Naive Bayes, Entropía Máxima y Máquinas de Soporte
+Vectorial (SVM, del inglés \emph{Support Vector Machines}) para la clasificación de
+polaridad de reseñas (en inglés) de películas; en \cite{scope_of_negation_camara}
+se realiza un estudio sobre el impacto de la negación en la clasificación de la
+polaridad en tuits en español, concluyendo que el tomar en cuenta dicho aspecto
+contribuye significativamente a una mejora en la clasificación de la polaridad;
+además, se encuentra el trabajo de \cite{paper_cesar}, donde se utilizan múltiples
+clasificadores, tales como: Entropía Máxima, Naive Bayes Multinomial, SVMs y
+BETO, un modelo BERT (del inglés \emph{Bidirectional Encoder Representations from
+Transformers}) entrenado con un corpues en español, para obtener la polaridad
+de tuits en español, lo que incluía encabezados de noticias, los hilos de la
+conversación correspondiente a dichos encabezados, tuits citados y los hilos de
+conversación que se generaron a partir de éstos.
+
+Por otro lado, se ha observado que los modelos de aprendizaje de máquina y
+aprendizaje profundo suelen ver afectado su desempeño cuando no se cuenta con
+suficientes datos, por lo que se suelen utilizar técnicas de aumento de datos y,
+en los casos en los que no se puede preservar las etiquetas, pseudoetiquetado,
+tal es el caso de \cite{gelbukh-2018-aggression}, donde se utilizó dicha técnica
+para mejorar el desmepeño de diversas arquitecturas de redes neuronales para la
+tarea de detección de agresión en redes sociales. También destaca el trabajo de
+\cite{pseudoetiquedato_transformers}, donde se hace uso del modelo DistilBERT en
+la tarea de clasificación de preguntas para su incorporación de sistemas tipo
+chatbots dedicados a responder preguntas, para contravenir la falta the datos
+etiquetados se utilizan técnicas de pseudoetiquetado, obteniendo como resultado
+que el modelo cuyo banco de datos de entrenamiento datos pseudoetiquetados
+presentó un mejor desempeño que aquellos con los cuáles no se utilizó dicha
+técnica para su entrenamiento. Por último, en \cite{blue} se hace uso del
+pseudoetiquetado para la mejora en los sistemas de detección de noticias, ya que
+el etiquetado manual de texto suele ser una tarea laboriosa, sobre todo dada la
+ingente cantidad de recursos disponibles en internet, lo que resulta en una
+falta de datos etiquetados disponibles; en este trabajo se observó un incremento
+en el desempeño de clasificación de entre el 2\% y 3\% cuando se agregaron nuevos
+datos cuya etiqueta fue asignada mediante algún algoritmo.
+
+
+
+\bibliographystyle{splncs04}
+\bibliography{referencias,referencias_cesar}
+\end{document}
