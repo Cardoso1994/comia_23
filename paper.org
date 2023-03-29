@@ -1,24 +1,32 @@
 #+title: Paper Comia 23
 
+
 :options:
 #+options: toc:nil
 #+options: title:nil
 #+options: author:nil
 #+export_file_name: comia_23_blue_cardoso_cesar.pdf
+
+# #+OPTIONS: d:(not "referencias")
 :end:
+
 
 :preamble:
 #+LATEX_CLASS: comia
 #+LATEX_CLASS_OPTIONS: [a4paper]
 
+#+latex_header: \usepackage[spanish]{babel}
 #+latex_header: \usepackage{cite}
 #+latex_header: \usepackage{graphicx}
-#+latex_header: \usepackage{cleveref}
+#+latex_header: \usepackage[spanish]{cleveref}
 #+latex_header: \usepackage{multirow}
-#+latex_header: \usepackage{graphicx}
 
-#+latex_header: \usepackage[spanish]{babel}
 #+latex_header: \usepackage[]{inputenc}
+
+#+latex_header: % \usepackage[style=apa, natbib=true]{biblatex} % Bibliography
+#+latex_header: % \usepackage[style=apa]{biblatex} % Bibliography
+#+latex_header: % \addbibresource{./bib/referencias.bib}
+#+latex_header: % \usepackage{csquotes}
 
 #+latex_header: \voffset=10mm
 #+latex_header: \hoffset=-3.5mm
@@ -32,28 +40,25 @@
 :end:
 
 
+
 :abstract:
 #+begin_src latex
   \title{Pseudoetiquetado para el análisis de polaridad en tuits: un primer
     acercamiento}
   % \author{}
   % \institute{}
-  \author{Diana Jimenez, Marco A. Cardoso-Moreno, Cesar Macias}
-  \authorrunning{Jimenez et al.}
+  % \author{Diana Jimenez, Marco A. Cardoso-Moreno, Cesar Macias}
+  % \authorrunning{Jimenez et al.}
 
 
-  \institute{Instituto Politécnico Nacional, \\ Centro de Investigación en Computación, \\
-    Laboratorio de Ciencias Cognitivas Computacionales, Ciudad de México, México \\
-  \email{correo_blue@cic.ipn.mx, \{correo_blue,mcardosom2021,correo_cesar\}@cic.ipn.mx}}
+  % \institute{Instituto Politécnico Nacional, \\ Centro de Investigación en Computación, \\
+  %   Laboratorio de Ciencias Cognitivas Computaciones, Ciudad de México, México \\
+  %   \email{\{correo_blue,mcardosom2021,correo_cesar\}@cic.ipn.mx}}
 
 \maketitle
 #+end_src
 
-
 #+begin_abstract
-
-
-\keywords{BCI \and EEG \and ERP \and P300}
 #+end_abstract
 
 #+begin_src latex
@@ -85,8 +90,8 @@ determinar el la opinión que una persona sobre el tema en cuestión
 [[cite:&mejova2009sentiment]]; el análisis de la polaridad en una opinión se
 considera, a su vez, una subtarea de este campo [[cite:&gambino-2019]]. Determinar
 la polaridad de un texto se refiere, entonces, a clasificar, dado un texto, si
-la opinión que se ha vertido en este es positiva o negatica, es decir, qué tan
-polarizada es.
+la opinión que se ha vertido en este es positiva o negativa, es decir, qué tan
+polarizada resulta.
 
 * Revisión de la literatura
 La clasificación de textos, por su parte, puede llevarse a cabo mediante
@@ -104,26 +109,33 @@ para lo cual utilizaron RNR tradicionales, así como redes LSTM; en
 /Robustly Optimized BERT Pretraining Approach/ y /Gated Recurrent Units/) para
 la clasificación de sentimientos en diversos datasets considerados como
 /baselines/; por su parte, [[cite:&sentiment_naive_bayes]] utilizan el clasificador
-Naive-Bayes para la misma tarea, apoyandose del recurso léxico /sentiwordnet/
+Naive Bayes (NB) para la misma tarea, apoyandose del recurso léxico /sentiwordnet/
 para agregar a cada palabra un puntaje de sentimiento positivo, negativo u
 objetivo.
 
 En cuanto a la tarea específica de análisis de polaridad en texto, uno de los
 primeros trabajos que se llevaron a cabo fue aquel de
 [[cite:&pang_sentiment_classification]], en el cual se utilizaron clasificadores
-tradicionales, tales como: Naive Bayes, Entropía Máxima y Máquinas de Soporte
+tradicionales, tales como: NB, Entropía Máxima y Máquinas de Soporte
 Vectorial (SVM, del inglés /Support Vector Machines/) para la clasificación de
 polaridad de reseñas (en inglés) de películas; en [[cite:&scope_of_negation_camara]]
 se realiza un estudio sobre el impacto de la negación en la clasificación de la
 polaridad en tuits en español, concluyendo que el tomar en cuenta dicho aspecto
 contribuye significativamente a una mejora en la clasificación de la polaridad;
 además, se encuentra el trabajo de [[cite:&paper_cesar]], donde se utilizan múltiples
-clasificadores, tales como: Entropía Máxima, Naive Bayes Multinomial, SVMs y
+clasificadores, tales como: Entropía Máxima, NB Multinomial (NBM), SVMs y
 BETO, un modelo BERT (del inglés /Bidirectional Encoder Representations from
 Transformers/) entrenado con un corpues en español, para obtener la polaridad
 de tuits en español, lo que incluía encabezados de noticias, los hilos de la
 conversación correspondiente a dichos encabezados, tuits citados y los hilos de
-conversación que se generaron a partir de éstos.
+conversación que se generaron a partir de éstos. También podemos encontrar el
+trabajo de Arias et al. [[cite:&arias_analyzing_spanish]], quienes crearon un banco
+de datos mediante la extracción de tuits a través de la
+API\footnote{https://developer.twitter.com} de Twitter, con clases: positivo,
+negativo y neutro, durante las pruebas de clasificación los autores optaron por
+diversos modelos, como son: /Random Forest/ (RF), /K-nearest Neighbors/ (KNN),
+NB, /Gradient Boosting/ (GB), /Support Vector Classifier/ (SVC) y
+/Extreme Gradient Boosting/ (XGBoost).
 
 Por otro lado, se ha observado que los modelos de aprendizaje de máquina y
 aprendizaje profundo suelen ver afectado su desempeño cuando no se cuenta con
@@ -148,13 +160,130 @@ datos cuya etiqueta fue asignada mediante algún algoritmo.
 
 
 
-:referencias:
-bibliographystyle:splncs04
-bibliography:referencias.bib,referencias_cesar.bib
-:end:
 * Desarrollo del proyecto
-Desarrollo
-* Experimentos y Resultados
+** Datasets
+Se utilizaron dos datasets: del TASS 2019 se seleccionaron las partes de
+entrenamiento y desarrollo para  ser unidas en una sola partición,
+adicionalmente, se hizo un proceso de /web scraping/ mediante la API versión 2
+de Twitter, con lo que se extrajeron 6500 tuits en español mexicano.
+** Preproceso de datos
+\label{sec:preproceso}
+Como parte de la etapa del preprocesamiento de datos se llevaron a cabo los
+siguientes procedimientos:
++ Entidades HTML: se remueven las entidades HTML que contenga el texto.
++ Saltos de línea: se quitan los saltos de línea.
++ Hashtags: En caso de haber hashtags, se separa el texto contenido en los
+  mismos (p.e. #CiudadDeMexico $\rightarrow$ Ciudad De Mexico).
++ Entidades de Twitter: se les dice así a las entidades que se utilizan
+  propiamente en Twitter para denotar usuarios, etiquetas, hashtags y retuits,
+  cada uno de estos tiene un identificador especial (@User, rt, #hashtag), se
+  identifican estas entidades y se remueven del texto.
++ URLs: se identifican y se remueven del texto.
++ Transformar el texto a únicamente letras minúsculas.
++ Palabras auxiliares: en caso de que así se requiera, se remueven las palabras
+  auxiliares que contenga el texto.
++ Lematización: si se requiere, las palabras son lematizadas utilizando la
+  librería spaCy.
++ Apóstrofes: tras la lematización, se remueven los apóstrofes del texto,
+  conservando el caracter sin el apóstrofe (p.e concatenación, niño
+  $\rightarrow$ concatenacion, nino).
++ Puntuación: se remueven los caracteres utilizados para puntuar el texto
+  (puntos, comas, punto y comas, etc.).
++ Caracteres repetidos: en caso de que un caracter se repita más de tres veces,
+  este se corta a dos repeticiones (p.e. Nooooo $\rightarrow$ Noo).
++ Palabras alfanuméricas: si el texto contiene palabras compuestas por letras y
+  números, como en el leet speaking, estas se remueven.
++ Caracteres especiales: se remueven todos los caracteres especiales que no
+  aportan nada al texto, signos de admiración, interrogación, etc.
++ Espacios en blanco: en caso de que exista más de un espacio en blanco entre
+  palabras, estos se remueven para homogeneizar el texto.
+
+Durante este proceso se crearon cuatro configuraciones para los conjuntos de
+datos utilizados, las cuáles difieren únicamente en si se incluyó o no, tanto
+la remoción de palabras auxiliares como la lematización de los textos; es decir,
+las cuatro configuraciones utilizadas contienen todo el preproceso enlistado
+previamente, y solo difieren entre sí por la presencia o ausencia de palabras
+auxiliares y la lematización. La Cref:tab:configuraciones_preproceso muestra
+cada una de las configuraciones.
+
+#+name: tab:configuraciones_preproceso
+#+attr_latex: :placement [htbp!] :align {cll}
+#+caption: Las cuatro configuraciones utilizadas; para cada una de ellas se
+#+caption: muestra si se removieron o no palabras auxiliares, y lematización.
+|---------------+---------------------------------+--------------|
+| Configuración | Remoción de Palabras Auxiliares | Lematización |
+|---------------+---------------------------------+--------------|
+|             1 | No                              | No           |
+|             2 | No                              | Sí           |
+|             3 | Sí                              | No           |
+|             4 | Sí                              | Sí           |
+|---------------+---------------------------------+--------------|
+
+Por último, para la extracción de características se utilizó un método de bolsa
+de palabras binario, donde los vectores solo tienen valores 0 y 1, dependiendo
+de si la palabra está presente o no en un tuit dado.
+
+** Experimentos
+En este trabajo se utilizan tres modelos: Regresión Logística (RL), NBM y una
+SVM con kernel lineal; además, creamos una partición de tres conjuntos sobre
+el dataset generado a partir de TASS: una para entrenamiento, que se conforma
+por el 70% de los datos; además de dos particiones de validación y prueba,
+respectivamente, cada una formada por 15%. La Cref:fig:particiones muestra
+gráficamente el proceso de partición.
+
+#+name: fig:particiones
+#+attr_latex: :placement [htbp!] :width 0.4\textwidth
+#+caption: Particiones sobre el dataset TASS.
+[[file:./img/comia_blue_particion.png]]
+
+Se realizaron dos tipos de experimentos, cada uno de ellos utilizando los 3
+modelos seleccionados, para las 4 configuraciones de datos descritas en
+la Sección ref:sec:preproceso.
+
+En el primer experimento se utiliza la partición de entrenamiento para entrenar
+al modelo como pseudoetiquetador. En primera instancia, mediante un proceso
+inspirado en /k-fold cross validation/, se eliminan las etiquetas de un
+porcentaje de los datos de entrenamiento (variando en cada iteración los datos
+a los cuales se les quitó su etiqueta); posteriormente se entrena al modelo con
+los datos que aún mantienen su etiqueta verdadera; toda vez que se ha entrenado
+al modelo, se procede a asignar etiquetas a los datos que carecen de ellas, aquí
+se conservan los $k$ mejores resultados para reentrenar el modelo con los datos
+con etiquetas verdaderas y los nuevos $k$ datos, este proceso continúa hasta
+terminar de asignar nuevas etiquetas; por último, se utiliza el conjunto de
+validación (Cref:fig:particiones) para medir el desempeño del modelo, tanto como
+pseudoetiquetador y como clasificador al final del experimento. La Cref:fig:exp1
+muestra el procedimiento llevado a cabo.
+
+#+name: fig:exp1
+#+attr_latex: :placement [htbp!] :width \textwidth
+#+caption: Experimento 1.
+[[file:./img/comia_blue_exp1.png]]
+
+En el segundo experimento se vuelve a trabajar con el conjunto de entrenamiento
+para utilizar al modelo como pseudoetiquetador, una vez que se ha entrenado,
+se procede a añadir etiquetas a los datos extraídos de Twitter (que no tienen
+una etiqueta asignada) mediante el mismo proceso del experimento 1, es decir,
+se asignan etiquetas a todos los datos, se conservan las $k$ mejores para
+reentrenar al modelo y así sucesivamente, hasta terminar de etiquetar los datos
+de Twitter. Una vez que se ha concluído esa primera etapa, se procede a medir
+el desmepeño del modelo con el conjunto de prueba (Cref:fig:particiones). De
+igual modo, la Cref:fig:exp2 muestra el procedimiento realizado en el
+experimento 2.
+
+#+name: fig:exp2
+#+attr_latex: :placement [htbp!] :width 0.82\textwidth
+#+caption: Experimento 2.
+[[file:./img/comia_blue_exp2.png]]
+
+
+* Resultados
 Experimentos y resultados
 * Conclusiones
 Conclusiones
+
+* Referencias
+:referencias:
+bibliographystyle:splncs04
+bibliography:./bib/referencias.bib
+
+:end:
