@@ -1,0 +1,55 @@
+#+title: Pape
+
+* nota
++ stop wors :: palabras auxialiares
+* Desarrollo
+** Dataset
+*** Ds1
+TASS 2019, parte de análisis de sentimientos en español mexicano (IberLEFF). *puro train y development*
+*Agregar descripción del dataset; y cita*
+*** Webscrapping
+Utilizando la API V2 de Twitter *(footnote de link a api)* se extrajeron aproximadamente 6500 tuits de temas
+recientes a la fecha de este artículo.
+**  Preproceso
+El preproceso consta, de manera general, con los siguientes pasos
+\begin{itemize}
+    \item Entidades HTML: se remueven las entidades HTML que contenga el texto.
+    \item Saltos de línea: se quitan los saltos de línea.
+    \item Hashtags: En caso de haber hashtags, se separa el texto contenido en los mismos (p.e. \#CiudadDeDmexico $\rightarrow$ Ciudad De Mexico).
+    \item Entidades de Twitter: se les dice así a las entidades que se utilizan propiamente en Twitter para denotar usuarios, etiquetas, hashtags y retuits, cada uno de estos tiene un identificador especial (@User, rt, \#hashtag), se identifican estas entidades y se remueven del texto.
+    \item URLs: se identifican y se remueven del texto.
+    \item Transformar a únicamente letras minúsculas.
+    \item Palabras auxiliares: en caso de que así se requiera, se remueven las palabras auxiliares que contenga el texto.
+    \item Lematización: si se requiere, las palabras son lematizadas utilizando la librería spaCy.
+    \item Apóstrofes: tras la lematización, se remueven los apóstrofes del texto, conservando el caracter sin el apóstrofe (p.e concatenación, niño $\rightarrow$ concatenacion, nino).
+    \item Puntuación: se remueven los caracteres utilizados para puntuar el texto (puntos, comas, punto y comas, etc.).
+    \item Caracteres repetidos: en caso de que un caracter se repita más de dos veces, este se corta a dos repeticiones (p.e. Nooooo $\rightarrow$ Noo).
+    \item Palabras alfanuméricas: si el texto contiene palabras compuestas por letras y números, como en el leet speaking, estas se remueven.
+    \item Caracteres especiales: se remueven todos los caracteres especiales que no aportan nada al texto, signos de admiración, interrogación, etc.
+    \item Espacios en blanco: en caso de que exista más de un espacio en blanco entre palabras, estos se remueven para homogeneizar el texto.
+\end{itemize}
+Se utilizaron 4 variantes de preproceso, que difieren en remover palabras de parada y lemmatization
+En general, los procedimientos utilizados fueron:
+*describir la lista de preproceso que cesar me va a pasar*
+
+|---------------+--------------------+--------------|
+| Configuracion | Remover stop words | Lematización |
+|---------------+--------------------+--------------|
+|             1 |                  0 |            0 |
+|             2 |                  1 |            0 |
+|             3 |                  0 |            1 |
+|             4 |                  1 |            1 |
+|---------------+--------------------+--------------|
+** Modelos
+Tres configuraciones, en cada una se utiliza el mismo modelo como
+pseudoetiquetador y como clasificador
++ RL-SGD
++ LSVM
++ Multinomial-NB
+* Experimentos y Resultados
+
+Se utilizo el modelo x con una partición y,
+
+quedan 1500 datos, 70% entrena, 15% val y 15% test
+
+se usó el de prueba para ajustar los parámetros de la SVM y del pseudoetiquetador
