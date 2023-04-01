@@ -8,12 +8,11 @@
 #+export_file_name: comia_23_blue_cardoso_cesar.pdf
 :end:
 
-
 :preamble:
 #+LATEX_CLASS: comia
 #+LATEX_CLASS_OPTIONS: [a4paper, spanish]
 
-#+latex_header: \usepackage[spanish]{babel}
+#+latex_header: \usepackage[spanish, english]{babel}
 #+latex_header: \addto\captionsspanish{\renewcommand{\tablename}{Tabla}}
 #+latex_header: \usepackage{cite}
 #+latex_header: \usepackage[spanish]{cleveref}
@@ -62,59 +61,51 @@
 #+end_src
 
 #+begin_abstract
-El análisis de polaridad es un tema de creciente interés, sobre todo en redes
-sociales ya que permite conocer si la opinión de las personas es negativa o
-positiva respecto a un tema en particular, en un ambiente libre; lo que nos
-permite conocer el impacto de productos, noticias, etc. En este trabajo se
-realiza análisis de polaridad en tuits en español haciendo uso de pseudo
-etiquetas generadas automáticamente para intentar combatir la escasez de datos
-además de técnicas de procesamiento de lenguaje natural.El análisis de polaridad
-es un tema de creciente interés, sobre todo en redes sociales ya que permite
-conocer si la opinión de las personas es negativa o positiva respecto a un tema
-en particular, en un ambiente libre; lo que nos permite conocer el impacto de
-productos, noticias, etc. En este trabajo se realiza análisis de polaridad en
-tuits en español haciendo uso de pseudo etiquetas generadas automáticamente
-para intentar combatir la escasez de datos además de técnicas de procesamiento
-de lenguaje natural.
+El análisis de polaridad en textos es un tema de creciente interés, sobre todo en redes
+sociales, ya que ayuda a conocer si la opinión de las personas es negativa o
+positiva con respecto a un tema en particular en un ambiente libre, lo que nos
+permite conocer el impacto que productos y noticias, por mencionar algunos
+ejemplos, tienen en la sociedad. En este trabajo se realiza análisis de
+polaridad en tuits en español mexicano, mediante el uso de pseudoetiquetas
+generadas automáticamente, con el fin de intentar combatir la escasez de datos
+etiquetados, reto inherente a la tarea de análisis de polaridad dada la vasta cantidad de
+información disponible y lo complicado de asignar etiquetas adecuadas a la
+misma; además de técnicas de clasificación para tareas de procesamiento de
+lenguaje natural.
+
+\textbf{Palabras Clave:}  polaridad, pseudoeetiquetado, tuits, aprendizaje automático, PLN
 #+end_abstract
 :end:
 
 :abstract_en:
 #+begin_src latex
   \selectlanguage{american}
-  \title{Pseudolabeling for twits polarity anallysis: a first approach}
-  % \author{}
-  % \institute{}
-  % \author{Diana Jimenez, Marco A. Cardoso-Moreno, Cesar Macias}
-  % \authorrunning{Jimenez et al.}
+  \begin{center}
+    \large\textbf{Twits pseudolabeling for polarity analysis: a first approach}
+  \end{center}
 
 
   % \institute{Instituto Politécnico Nacional, \\ Centro de Investigación en Computación, \\
   %   Laboratorio de Ciencias Cognitivas Computaciones, Ciudad de México, México \\
   %   \email{\{correo_blue,mcardosom2021,correo_cesar\}@cic.ipn.mx}}
 
-\maketitle
+  % \maketitle
 #+end_src
 
 #+begin_abstract
-El análisis de polaridad es un tema de creciente interés, sobre todo en redes
-sociales ya que permite conocer si la opinión de las personas es negativa o
-positiva respecto a un tema en particular, en un ambiente libre; lo que nos
-permite conocer el impacto de productos, noticias, etc. En este trabajo se
-realiza análisis de polaridad en tuits en español haciendo uso de pseudo
-etiquetas generadas automáticamente para intentar combatir la escasez de datos
-además de técnicas de procesamiento de lenguaje natural.El análisis de polaridad
-es un tema de creciente interés, sobre todo en redes sociales ya que permite
-conocer si la opinión de las personas es negativa o positiva respecto a un tema
-en particular, en un ambiente libre; lo que nos permite conocer el impacto de
-productos, noticias, etc. En este trabajo se realiza análisis de polaridad en
-tuits en español haciendo uso de pseudo etiquetas generadas automáticamente
-para intentar combatir la escasez de datos además de técnicas de procesamiento
-de lenguaje natural.
-#+end_abstract
+Polarity analysis in  texts is experiencing an interest growth, specially on
+social networks, due to its assitance in understanding if the opinion people have
+about certain topic, such as products or news, to name a few, is positive or
+negative, as well as the impact they have  in societies. In this work we perform
+a polarity analysis on twits written in mexican spanish, by creating
+pseudolabels via machine learning techniques to try to overcome the issues
+related with the vast data available online and the enormous ammmount of effort
+that implies to correctly label it; in addition, we use classification techniques for
+natural language processing tasks.
 
-#+begin_src latex
-#+end_src
+\textbf{Keywords:}  polarity, pseudolabeling, twits, machine learning, NLP
+#+end_abstract
+\selectlanguage{spanish}
 :end:
 
 * Introducción
@@ -411,17 +402,17 @@ Configuración      & \% ignorado & Recall          & Precisión       & Acc    
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{crrrrr}
 \hline
-Configuración      & \multicolumn{1}{l}{\% ignorado} & \multicolumn{1}{l}{Recall}          & \multicolumn{1}{l}{Precisión}       & \multicolumn{1}{l}{Acc}             & \multicolumn{1}{l}{F1}              \\ \hline
+Configuración      & \multicolumn{1}{r}{\% ignorado} & \multicolumn{1}{r}{Recall}          & \multicolumn{1}{r}{Precisión}       & \multicolumn{1}{r}{Acc}             & \multicolumn{1}{r}{F1}              \\ \hline
 \multirow{5}{*}{1} & \textbf{0}                      & \textbf{0.4883}                     & \textbf{0.4883}                     & \textbf{0.4883}                     & \textbf{0.4883}                     \\
                    & 20                              & 0.4589                              & 0.455                               & 0.6244                              & 0.4235                              \\
                    & 40                              & 0.4356                              & 0.4882                              & 0.6031                              & 0.3964                              \\
                    & 60                              & 0.4001                              & 0.4511                              & 0.5707                              & 0.3455                              \\
                    & 80                              & 0.3498                              & 0.4344                              & 0.5218                              & 0.2604                              \\ \hline
-\multirow{5}{*}{2} & \multicolumn{1}{l}{\textbf{0}}  & \multicolumn{1}{l}{\textbf{0.4883}} & \multicolumn{1}{l}{\textbf{0.5459}} & \multicolumn{1}{l}{\textbf{0.5956}} & \multicolumn{1}{l}{\textbf{0.4406}} \\
-                   & \multicolumn{1}{l}{20}          & \multicolumn{1}{l}{0.4502}          & \multicolumn{1}{l}{0.5855}          & \multicolumn{1}{l}{0.5973}          & \multicolumn{1}{l}{0.4343}          \\
-                   & \multicolumn{1}{l}{40}          & \multicolumn{1}{l}{0.4271}          & \multicolumn{1}{l}{0.5129}          & \multicolumn{1}{l}{0.5836}          & \multicolumn{1}{l}{0.3969}          \\
-                   & \multicolumn{1}{l}{60}          & \multicolumn{1}{l}{0.4137}          & \multicolumn{1}{l}{0.4854}          & \multicolumn{1}{l}{0.5764}          & \multicolumn{1}{l}{0.3723}          \\
-                   & \multicolumn{1}{l}{80}          & \multicolumn{1}{l}{0.3856}          & \multicolumn{1}{l}{0.4493}          & \multicolumn{1}{l}{0.5551}          & \multicolumn{1}{l}{0.3245}          \\ \hline
+\multirow{5}{*}{2} & \multicolumn{1}{r}{\textbf{0}}  & \multicolumn{1}{r}{\textbf{0.4883}} & \multicolumn{1}{r}{\textbf{0.5459}} & \multicolumn{1}{r}{\textbf{0.5956}} & \multicolumn{1}{r}{\textbf{0.4406}} \\
+                   & \multicolumn{1}{r}{20}          & \multicolumn{1}{r}{0.4502}          & \multicolumn{1}{r}{0.5855}          & \multicolumn{1}{r}{0.5973}          & \multicolumn{1}{r}{0.4343}          \\
+                   & \multicolumn{1}{r}{40}          & \multicolumn{1}{r}{0.4271}          & \multicolumn{1}{r}{0.5129}          & \multicolumn{1}{r}{0.5836}          & \multicolumn{1}{r}{0.3969}          \\
+                   & \multicolumn{1}{r}{60}          & \multicolumn{1}{r}{0.4137}          & \multicolumn{1}{r}{0.4854}          & \multicolumn{1}{r}{0.5764}          & \multicolumn{1}{r}{0.3723}          \\
+                   & \multicolumn{1}{r}{80}          & \multicolumn{1}{r}{0.3856}          & \multicolumn{1}{r}{0.4493}          & \multicolumn{1}{r}{0.5551}          & \multicolumn{1}{r}{0.3245}          \\ \hline
 \multirow{5}{*}{3} & \textbf{0}                      & \textbf{0.5539}                     & \textbf{0.624}                      & \textbf{0.6667}                     & \textbf{0.5608}                     \\
                    & 20                              & 0.5201                              & 0.6097                              & 0.648                               & 0.5127                              \\
                    & 40                              & 0.5099                              & 0.5996                              & 0.644                               & 0.4969                              \\
@@ -545,9 +536,28 @@ respectivamente.
 
 \clearpage
 * Conclusiones
-Conclusiones
+En este trabajo se presentó un primer acercamiento en el uso de técnicas de
+pseudoetiquetado para el robustecimiento de modelos desarrollados para la tarea
+de análisis de polaridad en tuits.
 
-* Referencias
+En primera instancia, el método aquí propuesto mostró ayudar al desempeño de los
+modelos de RL y SVM que, en términos generales, crean una frontera de decisión a
+través de un hiperplano que separa el espacio de características; por su parte,
+nuestro método no refleja una mejora en los resultados del clasificador NBM, que
+realiza sus decisiones mediante computaciones probabilísticas.
+
+Es importante hacer notar que en el experimento 1, para aquellos casos en los
+que hubo una mejora en la clasificación gracias al pseudoetiquetado, dicha
+mejora se presenta cuando el porcentaje de datos ignorados no excede la mitad
+de la cardinalidad del dataset original; es decir, una vez que se ignora la
+etiqueta de la mitad, o más, patrones, deja de haber una mejora en los resultados.
+
+Por último, se observa que el ignorar etiquetas de algunos patrones, para
+posteriormente asignarles a los mismos nuevas etiquetas mediante
+pseudoetiquetado, contribuyó a una mejora en el dessempeño de los modelos, lo
+que presenta una nueva veta de investigación que permita utilizar el
+pseudoetiquetado como un método de regularización.
+
 :referencias:
 bibliographystyle:splncs04
 bibliography:./bib/referencias.bib
