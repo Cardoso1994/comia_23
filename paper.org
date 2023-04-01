@@ -6,8 +6,6 @@
 #+options: title:nil
 #+options: author:nil
 #+export_file_name: comia_23_blue_cardoso_cesar.pdf
-
-# #+OPTIONS: d:(not "referencias")
 :end:
 
 
@@ -16,17 +14,17 @@
 #+LATEX_CLASS_OPTIONS: [a4paper]
 
 #+latex_header: \usepackage[spanish]{babel}
-#+latex_header: \usepackage{cite}
+# #+latex_header: \usepackage{cite}
 #+latex_header: \usepackage{graphicx}
 #+latex_header: \usepackage[spanish]{cleveref}
 #+latex_header: \usepackage{multirow}
 
 #+latex_header: \usepackage[]{inputenc}
 
-#+latex_header: % \usepackage[style=apa, natbib=true]{biblatex} % Bibliography
-#+latex_header: % \usepackage[style=apa]{biblatex} % Bibliography
-#+latex_header: % \addbibresource{./bib/referencias.bib}
-#+latex_header: % \usepackage{csquotes}
+# #+latex_header: \usepackage[style=apa, natbib=true]{biblatex} % Bibliography
+#+latex_header: \usepackage[style=apa]{biblatex} % Bibliography
+#+latex_header: \addbibresource{./bib/referencias.bib}
+#+latex_header: \usepackage{csquotes}
 
 #+latex_header: \usepackage{multirow}
 #+latex_header: \usepackage{graphicx}
@@ -44,8 +42,44 @@
 
 :abstract:
 #+begin_src latex
+  \selectlanguage{spanish}
   \title{Pseudoetiquetado para el análisis de polaridad en tuits: un primer
     acercamiento}
+  % \author{}
+  % \institute{}
+  % \author{Diana Jimenez, Marco A. Cardoso-Moreno, Cesar Macias}
+  % \authorrunning{Jimenez et al.}
+
+
+  % \institute{Instituto Politécnico Nacional, \\ Centro de Investigación en Computación, \\
+  %   Laboratorio de Ciencias Cognitivas Computaciones, Ciudad de México, México \\
+  %   \email{\{correo_blue,mcardosom2021,correo_cesar\}@cic.ipn.mx}}
+
+  \maketitle
+#+end_src
+
+#+begin_abstract
+El análisis de polaridad es un tema de creciente interés, sobre todo en redes
+sociales ya que permite conocer si la opinión de las personas es negativa o
+positiva respecto a un tema en particular, en un ambiente libre; lo que nos
+permite conocer el impacto de productos, noticias, etc. En este trabajo se
+realiza análisis de polaridad en tuits en español haciendo uso de pseudo
+etiquetas generadas automáticamente para intentar combatir la escasez de datos
+además de técnicas de procesamiento de lenguaje natural.El análisis de polaridad
+es un tema de creciente interés, sobre todo en redes sociales ya que permite
+conocer si la opinión de las personas es negativa o positiva respecto a un tema
+en particular, en un ambiente libre; lo que nos permite conocer el impacto de
+productos, noticias, etc. En este trabajo se realiza análisis de polaridad en
+tuits en español haciendo uso de pseudo etiquetas generadas automáticamente
+para intentar combatir la escasez de datos además de técnicas de procesamiento
+de lenguaje natural.
+#+end_abstract
+:end:
+
+:abstract_en:
+#+begin_src latex
+  \selectlanguage{american}
+  \title{Pseudolabeling for twits polarity anallysis: a first approach}
   % \author{}
   % \institute{}
   % \author{Diana Jimenez, Marco A. Cardoso-Moreno, Cesar Macias}
@@ -60,6 +94,20 @@
 #+end_src
 
 #+begin_abstract
+El análisis de polaridad es un tema de creciente interés, sobre todo en redes
+sociales ya que permite conocer si la opinión de las personas es negativa o
+positiva respecto a un tema en particular, en un ambiente libre; lo que nos
+permite conocer el impacto de productos, noticias, etc. En este trabajo se
+realiza análisis de polaridad en tuits en español haciendo uso de pseudo
+etiquetas generadas automáticamente para intentar combatir la escasez de datos
+además de técnicas de procesamiento de lenguaje natural.El análisis de polaridad
+es un tema de creciente interés, sobre todo en redes sociales ya que permite
+conocer si la opinión de las personas es negativa o positiva respecto a un tema
+en particular, en un ambiente libre; lo que nos permite conocer el impacto de
+productos, noticias, etc. En este trabajo se realiza análisis de polaridad en
+tuits en español haciendo uso de pseudo etiquetas generadas automáticamente
+para intentar combatir la escasez de datos además de técnicas de procesamiento
+de lenguaje natural.
 #+end_abstract
 
 #+begin_src latex
@@ -488,7 +536,6 @@ respectivamente.
                                 & 60                            & 2623                      & 1050                     & 1574                       & 0.4571                     & 0.5472                        & 0.5924                  & 0.4196                 \\
                                 & 80                            & 5245                      & 1050                     & 4196                       & 0.4505                     & 0.4724                        & 0.592                   & 0.4102                 \\ \hline
 \end{tabular}%
-}
 \end{table}
 #+end_src
 :end:
@@ -499,7 +546,10 @@ Conclusiones
 
 * Referencias
 :referencias:
-bibliographystyle:splncs04
-bibliography:./bib/referencias.bib
+# bibliographystyle:splncs04
+# bibliography:./bib/referencias.bib
+
+[[printbibliography:]]
+
 
 :end:

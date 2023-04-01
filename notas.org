@@ -53,3 +53,24 @@ Se utilizo el modelo x con una partición y,
 quedan 1500 datos, 70% entrena, 15% val y 15% test
 
 se usó el de prueba para ajustar los parámetros de la SVM y del pseudoetiquetador
+
+* Abstract
+El análisis de polaridad es un tema de creciente interés, sobre todo en redes
+sociales ya que permite conocer si la opinión de las personas es negativa o
+positiva respecto a un tema en particular, en un ambiente libre; lo que nos
+permite conocer el impacto de productos, noticias, etc. En este trabajo se
+realiza análisis de polaridad en tuits en español haciendo uso de pseudo
+etiquetas generadas automáticamente para intentar combatir la escasez de datos
+además de técnicas de procesamiento de lenguaje natural.El análisis de polaridad
+es un tema de creciente interés, sobre todo en redes sociales ya que permite
+conocer si la opinión de las personas es negativa o positiva respecto a un tema
+en particular, en un ambiente libre; lo que nos permite conocer el impacto de
+productos, noticias, etc. En este trabajo se realiza análisis de polaridad en
+tuits en español haciendo uso de pseudo etiquetas generadas automáticamente
+para intentar combatir la escasez de datos además de técnicas de procesamiento
+de lenguaje natural.
+* Conclusiones
+1. El método funcionó para los modelos que parten el espacio, no para el estadísticos
+2. El mejor resultado en el global fue obtenido como pseudo etiquetas
+3. Al superar la mitad de datos etiquetados por lo general se pierde la mejora (si es q hubo)
+4. Es interesante ver que a veces el solo  ignorar etiquetas  y generarlas mejora el resultado sobre el mismo conjunto de prueba lo que hace pensar en algún posible tipo de regularización
