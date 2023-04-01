@@ -11,20 +11,23 @@
 
 :preamble:
 #+LATEX_CLASS: comia
-#+LATEX_CLASS_OPTIONS: [a4paper]
+#+LATEX_CLASS_OPTIONS: [a4paper, spanish]
 
 #+latex_header: \usepackage[spanish]{babel}
-# #+latex_header: \usepackage{cite}
-#+latex_header: \usepackage{graphicx}
+#+latex_header: \addto\captionsspanish{\renewcommand{\tablename}{Tabla}}
+#+latex_header: \usepackage{cite}
 #+latex_header: \usepackage[spanish]{cleveref}
+#+latex_header: \crefname{table}{Tabla}{Tablas}
+
 #+latex_header: \usepackage{multirow}
+#+latex_header: \usepackage{graphicx}
 
 #+latex_header: \usepackage[]{inputenc}
 
-# #+latex_header: \usepackage[style=apa, natbib=true]{biblatex} % Bibliography
-#+latex_header: \usepackage[style=apa]{biblatex} % Bibliography
-#+latex_header: \addbibresource{./bib/referencias.bib}
-#+latex_header: \usepackage{csquotes}
+# #+latex_header: \usepackage{csquotes}
+# #+latex_header: \usepackage[style=apa]{biblatex} % Bibliography
+# #+latex_header: \usepackage[style=splncs04]{biblatex} % Bibliography
+# #+latex_header: \addbibresource{./bib/referencias.bib}
 
 #+latex_header: \usepackage{multirow}
 #+latex_header: \usepackage{graphicx}
@@ -328,7 +331,7 @@ experimento 2.
 
 * Resultados
 En esta sección se presentan los resultados de ambos experimentos. En las
-tablas ref:tab:exp_1_rl,tab:exp_1_svm,tab:exp_1_nbm se muestran los resultados
+Cref:tab:exp_1_rl,tab:exp_1_svm,tab:exp_1_nbm se presentan los resultados
 obtenidos en el experimento 1 con los modelos RL, SVM y NBM, respectivamente.
 
 :experimento_1:
@@ -435,7 +438,7 @@ Configuración      & \multicolumn{1}{l}{\% ignorado} & \multicolumn{1}{l}{Recal
 #+end_src
 :end:
 
-Por su parte, las tablas ref:tab:exp_2_rl,tab:exp_2_svm,tab:exp_2_nbm muestran los
+Por su parte, las tablas Cref:tab:exp_2_rl,tab:exp_2_svm,tab:exp_2_nbm muestran los
 resultados obtenidos en el experimento 2 con los modelos RL, SVM y NBM,
 respectivamente.
 :experimento_2:
@@ -546,10 +549,10 @@ Conclusiones
 
 * Referencias
 :referencias:
-# bibliographystyle:splncs04
-# bibliography:./bib/referencias.bib
+bibliographystyle:splncs04
+bibliography:./bib/referencias.bib
 
-[[printbibliography:]]
+# [[printbibliography:]]
 
 
 :end:
